@@ -13,7 +13,7 @@ class LoanController extends Controller
 {
     //  Loan Product ID
 
-  public $base_url = 'https://palla.techsavanna.technology:7000/fineract-provider/api/v1/';
+  public $base_url = 'https://new-cbs.lixnet.net:8000/fineract-provider/api/v1/';
   public $username = 'admin';
 
   public $password = 'password';
@@ -432,7 +432,7 @@ class LoanController extends Controller
 
     public function loanExists($id,$loan)
     {
-	 	$url = "https://palla.techsavanna.technology:7000/fineract-provider/api/v1/loans?username=".$this->username."&password=".$this->password."&tenantIdentifier=".$this->tenant;
+	 	$url = "https://new-cbs.lixnet.net:8000/fineract-provider/api/v1/loans?username=".$this->username."&password=".$this->password."&tenantIdentifier=".$this->tenant;
  
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_URL, $url);

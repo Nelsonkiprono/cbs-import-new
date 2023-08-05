@@ -11,7 +11,7 @@
   // -H 'Cookie: autologin=a%3A2%3A%7Bs%3A7%3A%22user_id%22%3Bs%3A1%3A%229%22%3Bs%3A3%3A%22key%22%3Bs%3A16%3A%223934d80bc6a8a2df%22%3B%7D' \
   // -H 'Fineract-Platform-TenantId: default' \
   // -H 'Origin: https://localhost:8443' \
-  // -H 'Referer: https://localhost:8443/palla-credit/' \
+  // -H 'Referer: https://localhost:8443/lixnet-cbs/' \
   // -H 'Sec-Fetch-Dest: empty' \
   // -H 'Sec-Fetch-Mode: cors' \
   // -H 'Sec-Fetch-Site: same-origin' \
@@ -39,7 +39,7 @@
  //  -H 'Cookie: autologin=a%3A2%3A%7Bs%3A7%3A%22user_id%22%3Bs%3A1%3A%229%22%3Bs%3A3%3A%22key%22%3Bs%3A16%3A%223934d80bc6a8a2df%22%3B%7D' \
  //  -H 'Fineract-Platform-TenantId: default' \
  //  -H 'Origin: https://localhost:8443' \
- //  -H 'Referer: https://localhost:8443/palla-credit/' \
+ //  -H 'Referer: https://localhost:8443/lixnet-cbs/' \
  //  -H 'Sec-Fetch-Dest: empty' \
  //  -H 'Sec-Fetch-Mode: cors' \
  //  -H 'Sec-Fetch-Site: same-origin' \
@@ -69,7 +69,7 @@
  //  -H 'Cookie: autologin=a%3A2%3A%7Bs%3A7%3A%22user_id%22%3Bs%3A1%3A%229%22%3Bs%3A3%3A%22key%22%3Bs%3A16%3A%223934d80bc6a8a2df%22%3B%7D' \
  //  -H 'Fineract-Platform-TenantId: default' \
  //  -H 'Origin: https://localhost:8443' \
- //  -H 'Referer: https://localhost:8443/palla-credit/' \
+ //  -H 'Referer: https://localhost:8443/lixnet-cbs/' \
  //  -H 'Sec-Fetch-Dest: empty' \
  //  -H 'Sec-Fetch-Mode: cors' \
  //  -H 'Sec-Fetch-Site: same-origin' \
@@ -107,7 +107,7 @@
   // -H 'Cookie: autologin=a%3A2%3A%7Bs%3A7%3A%22user_id%22%3Bs%3A1%3A%229%22%3Bs%3A3%3A%22key%22%3Bs%3A16%3A%223934d80bc6a8a2df%22%3B%7D' \
   // -H 'Fineract-Platform-TenantId: default' \
   // -H 'Origin: https://localhost:8443' \
-  // -H 'Referer: https://localhost:8443/palla-credit/' \
+  // -H 'Referer: https://localhost:8443/lixnet-cbs/' \
   // -H 'Sec-Fetch-Dest: empty' \
   // -H 'Sec-Fetch-Mode: cors' \
   // -H 'Sec-Fetch-Site: same-origin' \

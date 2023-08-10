@@ -56,7 +56,7 @@ class LoanController extends Controller
 			if (isset($client)) {
 				$checkLoanExists = $this->checkLoanExists($client->id,$loan);
 				if($checkLoanExists == 0){	
-					$this->applyLoan($client->id,$loan);
+					$this->applyLoan($client->id,$loan,$loan_id);
 			    }
 			    else{
 			    	$this->updateAppliedLoan($loan->phone);

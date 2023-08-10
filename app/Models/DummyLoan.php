@@ -11,7 +11,7 @@ class DummyLoan extends Model
 {
     use HasFactory;
     
-    public $table = "dummy_loans";
+    public $table = "x_loanaccounts";
 
     public function client(){
         return $this->hasOne('App\Models\Client','mobile_no','phone');

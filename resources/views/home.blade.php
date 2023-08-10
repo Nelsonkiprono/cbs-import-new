@@ -1,20 +1,23 @@
-@extends('layouts.app')
 
+//<a href="{{ route('getLoans') }}">getLoans</a>
+
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <table class="table table-striped">
               <thead>
+        
                 <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Name</th>
+                 <th scope="col">ID</th>
+                 <th scope="col">Name</th>
                   <th scope="col">External ID</th>
-                  <th scope="col">Phone No</th>
+                 <th scope="col">Phone No</th>
                   <th scope="col">office</th>
-                </tr>
-              </thead>
-              <tbody>
+                 </tr>
+                </thead>
+                <tbody>
                 @foreach($clients as $client)
                 <tr>
                   <th scope="row">{{ $client->id }}</th>

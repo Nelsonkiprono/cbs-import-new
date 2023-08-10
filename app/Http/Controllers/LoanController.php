@@ -11,9 +11,12 @@ use App\Models\Payment;
 
 class LoanController extends Controller
 {
+
+	// public $email_address = Client::where('id','1')->get();
+
     //  Loan Product ID
 
-  public $base_url = 'https://new-cbs.lixnet.net:8000/fineract-provider/api/v1/';
+  public $base_url = 'https://palla.techsavanna.technology:7000/fineract-provider/api/v1/';
   public $username = 'admin';
 
   public $password = 'password';
@@ -36,16 +39,18 @@ class LoanController extends Controller
 
 
 	public function initializeperloan(){
-		$loans = $this->getClientLoans();
+		$loans = $this->getClientLoans('0799 - 945989');
+		// return $loans
 
 		
 		foreach($loans as $loan){
-			$phone2 = $this->formatnumber($loan->phone);
+			$email_address2 = $this->formatnumber($loan->phone);
 			$this->setCount();
 			// dd($this->formatnumber($loan->phone));
 			if (isset($loan->phone)) {
 				$client = $this->getClient($loan->phone);
-				// dd($client);
+				 //dd($client);
+				 
 			}
 			
 			if (isset($client)) {
@@ -250,9 +255,9 @@ class LoanController extends Controller
 
 	// Get one client
 
-	public function getClient($phone = ''){
+	public function getClient($email_address = ''){
 
-		 $client = Client::where('mobile_no',$phone)->first();
+		 $client = Client::where('mobile_no',$email_address)->first();
 
 		 return $client;
 	}
@@ -299,22 +304,45 @@ class LoanController extends Controller
 	
 		return $trans_dates;
 	}
+
 	// Get the loans for a client
-	public function getClientLoans($phone = ''){
-			$loans = DummyLoan::where('applied','0')->where('start_date','>','2022-04-30')->where('start_date','<','2022-05-31')->get();
-			//$loans = DummyLoan::where('applied','0')->get();
-			return $loans;
+	public function getClientLoans($email_address=1){
+
+		$email_address =Client::all();
+		foreach($email_address as $email){
+			$id = $email->email_address;
+			$loan= DummyLoan::where('member_id', $id)->get();
+
+			// var_dump($loan);
+			
+			foreach($loan as $s_loan){
+				
+				$loan = $s_loan;
+				
+				//$loan_id will be used as external id in m_loan table
+				$loan_id = $s_loan->id;
+
+				// echo $loan." : ".$id."<br>";
+			 $this->applyLoan($id,$loan,$loan_id);
+
+			}
+	
+
+			}
+
+
+			
 	}
 
-	public function updateAppliedLoan($phone){
-		  DummyLoan::where("phone", $phone)->update(["applied" => "1"]);
+	public function updateAppliedLoan($email_address){
+		  DummyLoan::where("phone", $email_address)->update(["applied" => "1"]);
 	}
 	 // Funtion to get repayments of a loan
 
-	 public function getRepayments($phone){
+	 public function getRepayments($email_address){
 	 	// implode(', ', $mystaff)
 	 	// ->whereNotIn('date',implode(', ', $mystaff));
-	 	$payments = Payment::where('used','0')->where('phone',$phone)->get();
+	 	$payments = Payment::where('used','0')->where('phone',$email_address)->get();
 	 	return $payments;
 	 }
 
@@ -386,9 +414,9 @@ class LoanController extends Controller
     	$this->payed = 0;
     }
 	// Check the number of loans that the client has
-	public function getLoanNo($phone = '')
+	public function getLoanNo($email_address = '')
 	{
-		$number = DummyLoan::where('phone',$phone)->count();
+		$number = DummyLoan::where('phone',$email_address)->count();
 		return $number;
 	}
 
@@ -432,7 +460,7 @@ class LoanController extends Controller
 
     public function loanExists($id,$loan)
     {
-	 	$url = "https://new-cbs.lixnet.net:8000/fineract-provider/api/v1/loans?username=".$this->username."&password=".$this->password."&tenantIdentifier=".$this->tenant;
+	 	$url = "https://palla.techsavanna.technology:7000/fineract-provider/api/v1/loans?username=".$this->username."&password=".$this->password."&tenantIdentifier=".$this->tenant;
  
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_URL, $url);
@@ -454,18 +482,20 @@ class LoanController extends Controller
 
 
 	// Apply loan for a client
-	public function applyLoan($id,$loan){
+	public function applyLoan($id,$loan,$loan_id){
 		
 		ini_set('max_execution_time', 216000); //3 minutes
 		$url = $this->base_url."loans?username=".$this->username."&password=".$this->password."&tenantIdentifier=".$this->tenant;
 
-		$date = $this->formatedate($loan->start_date);
+		$date = $this->formatedate($loan->application_date);
 
 
 		$amount = $this->formatamount($loan->amount);
 
 		
 
+		$curl = curl_init($url);
+		//$url="https://ussdhost.000webhostapp.com/jsonreceive.php";
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_POST, true);
@@ -480,6 +510,7 @@ class LoanController extends Controller
 
 		$data = <<<DATA
 		{
+		  "external_id": $loan_id,
 		  "clientId": $id,
 		  "productId": 5,
 		  "disbursementData": [],
@@ -682,3 +713,4 @@ class LoanController extends Controller
 	 }
 
 }
+

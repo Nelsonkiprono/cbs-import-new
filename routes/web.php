@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Added by senor to test get loan function getClientLoans
+Route::get('/getLoans', [App\Http\Controllers\LoanController::class, 'getClientLoans'])->name('getLoans');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dummy', [App\Http\Controllers\HomeController::class, 'dummy'])->name('dummy');
 Route::get('/joined', [App\Http\Controllers\HomeController::class, 'joined'])->name('joined');
